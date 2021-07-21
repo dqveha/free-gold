@@ -1,0 +1,20 @@
+<h1>Update <%= @album.name() %></h1>
+
+<form action="/albums/<%= @album.id() %>" method="post">
+  <input name="_method" type="hidden" value="patch">
+
+  <label for="name">Rename album</label>
+  <input id="name" name="name" type="text">
+
+  <button type="submit">Update</button>
+</form>
+
+<form action="/albums/<%= @album.id() %>" method="post">
+  <input name="_method" type="hidden" value="delete">
+
+  <button type="submit">Delete album</button>
+</form>
+
+<p><a href="/albums">Return to album list</a></p>
+
+<%# Note that we're using the POST method. Sinatra doesn't have support for PUT (also known as PATCH) and DELETE methods so we have to fake a PUT request. We'll do this by adding the following line: <input name="_method" type="hidden" value="patch">. This specifies that we're using the PATCH method and that the field should be hidden. The field is hidden because we don't want users to alter it or deal with it. %>

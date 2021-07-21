@@ -1,0 +1,19 @@
+<h1>Add a new album</h1>
+
+<form action="/albums" method="post">
+  <div class="form-group">
+    <label for="album_name">Album name</label>
+    <input id="n" name="album_name" class="form-control" type="text">
+  </div>
+  <button type="submit" class="btn">Go!</button>
+</form>
+
+<%# The form action is /albums and the form method is post, which means Sinatra will look in app.rb for post("/albums"). If that block doesn’t exist, we’ll get a "Sinatra doesn't recognize this ditty" error. This is a common point of confusion for beginners. Also note that routes should always begin with a /, but sometimes beginners forget to add the / to the form action. That will lead to an error as well, one that can be tough for tired eyes to catch. 
+
+post('/albums') do
+  name = params[:album_name]
+  album = Album.new(name, nil)
+  album.save()
+end
+
+%>

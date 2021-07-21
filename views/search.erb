@@ -1,0 +1,12 @@
+<h3>Search Records</h3>
+
+<% if @what.any? %>
+
+  <ul>
+    <% @what.each do |album| %>
+      <li><%= album.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <% return%>
+<% end %>
