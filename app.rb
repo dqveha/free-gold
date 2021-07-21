@@ -7,6 +7,7 @@ require 'pry'
 
 get('/') do
   @albums = Album.all
+  @sold_albums = Album.sold_all()
   @albums = Album.alphabet()
   erb(:albums)
 end
@@ -17,6 +18,7 @@ end
 
 get('/albums') do
   @albums = Album.all
+  @sold_albums = Album.sold_all()
   @albums = Album.alphabet()
   erb(:albums)
 end
@@ -28,8 +30,9 @@ end
 post('/albums') do
   name = params[:album_name]
   album = Album.new(name, nil)
-  album.save()
+  album.save() # saves into class variable (@@albums)
   @albums = Album.all()
+  @sold_albums = Album.sold_all()
   @albums = Album.alphabet()
   erb(:albums)
 end
@@ -58,6 +61,14 @@ end
 get('/albums/:id/edit') do
   @album = Album.find(params[:id].to_i())
   erb(:edit_album)
+end
+
+post('/albums/:id/buy') do
+  @album = Album.find(params[:id].to_i())
+  @album.sold()
+  @albums = Album.all()
+  @sold_albums = Album.sold_all()
+  erb(:buy)
 end
 
 # get('/albums/:id/edit') do
@@ -125,4 +136,4 @@ post('/albums/search') do
   erb(:search)
 end
 
-# to search stuff.. I guess it needs to show up as post.. wtf
+# to search stuff.. I guess it needs to show up as post..

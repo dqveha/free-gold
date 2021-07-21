@@ -16,6 +16,18 @@
   <p>There are currently no records to display.</p>
 <% end %>
 
+<h3>Sold Records</h3>
+
+<% if @sold_albums.any? %> <%# Array#any? checks if the array contains anything%> 
+  <ul>
+    <% @sold_albums.each do |album| %>
+      <li><%= album.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are currently no records sold.</p>
+<% end %>
+
 <a href="/albums/new">Add a new album</a>
 
 <form action="/albums/search" method="post">

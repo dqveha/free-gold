@@ -93,4 +93,28 @@ describe '#Album' do
       expect(Album.search("Blue")).to(eq([album2]))
     end
   end
+
+  describe('.alphabetize') do
+    it("should sort the album by its name") do
+      album = Album.new("Giant Steps", nil)
+      album.save()
+      album2 = Album.new("Blue", nil)
+      album2.save()
+      expect(Album.alphabet()).to(eq([album2, album]))
+    end
+  end
+
+  describe('.sold') do
+    it("it should sell an album") do 
+      album = Album.new("Giant Steps", nil)
+      album2 = Album.new("Blue", nil)
+      album.save()
+      album2.save()
+      expect(Album.all()).to(eq([album, album2]))
+      album.sold()
+      album2.sold()
+      expect(Album.sold_all()).to(eq([album, album2]))
+      expect(Album.all()).to(eq([]))
+    end
+  end
 end
