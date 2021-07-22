@@ -66,9 +66,7 @@ end
 post('/albums/:id/buy') do
   @album = Album.find(params[:id].to_i())
   @album.sold()
-  @albums = Album.all()
-  @sold_albums = Album.sold_all()
-  erb(:buy)
+  redirect to ('/albums')
 end
 
 # get('/albums/:id/edit') do
